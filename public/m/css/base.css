@@ -14,7 +14,7 @@
 .my-footer .mui-tab-item {
   color: #FFF;
 }
-.my-footer .mui-tab-item .mui-active {
+.my-footer .mui-tab-item.mui-active {
   color: darkorange;
 }
 a {
