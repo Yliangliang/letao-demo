@@ -71,7 +71,6 @@ $(function(){
 		$('#history-box').html("");
 
 		localStorage.removeItem("keyArr");
-
 	});
 	
 
