@@ -2,41 +2,17 @@
 var keyword =getParamsByUrl(location.href,'keyword');
 //当前页面
 var page =1;
-
+//页面中的数据
 var html = "";
+//价格排序规则 升序
+var priceSort = 1;
+var This =null;
 
 $(function(){
 //    根据用户输入的关键字获取搜索结果
 //    1. 获取到地址栏中用户输入的搜索关键字
 //    2.用关键字去调取搜索接口
 //    3.将搜索的结果展示在页面中
-
-
-
-    $.ajax({
-        url:'/product/queryProduct',
-        type:'get',
-        data:{
-            page:1,
-            pageSize:6,
-            proName:keyword
-        },
-        success:function(response){
-            if(response.data.length>0){
-                html =template('searchTpi',response);
-                $('#search-box').html(html);
-
-                //告诉上拉加载组件当前数据加载完毕
-                This.endPullupToRefresh(false);
-            }else{
-                //告诉上拉加载组件当前数据加载完毕
-                This.endPullupToRefresh(false);
-            }
-
-        }
-
-    });
-
     mui.init({
         pullRefresh : {
             container: '#refreshContainer',//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -50,6 +26,15 @@ $(function(){
         }
     });
 
+    $('#priceSort').on('tap',function(){
+        //更改价格排序
+        priceSort = priceSort ==1?2:1;
+        html = "";
+        page = 1;
+        mui('#refreshContainer').pullRefresh().refresh(true);
+        gerData();
+    })
+
 
 });
 function getParamsByUrl(url, name){
@@ -62,4 +47,33 @@ function getParamsByUrl(url, name){
         }
     }
     return null;
+}
+
+function gerData(){
+    if(!This){
+        This = this;
+    }
+
+$.ajax({
+    url:'/product/queryProduct',
+    type:'get',
+    data:{
+        page:1,
+        pageSize:6,
+        proName:keyword
+    },
+    success:function(response){
+        if(response.data.length>0){
+            html =template('searchTpi',response);
+            $('#search-box').html(html);
+
+            //告诉上拉加载组件当前数据加载完毕
+            This.endPullupToRefresh(false);
+        }else{
+            //告诉上拉加载组件当前数据加载完毕
+            This.endPullupToRefresh(true);
+        }
+    }
+});
+
 }
