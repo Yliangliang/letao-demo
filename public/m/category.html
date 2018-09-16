@@ -7,9 +7,11 @@
 	<link rel="stylesheet" href="assets/mui/css/mui.min.css">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/category.css">
+	<link rel="stylesheet" href="assets/fontAwesome/css/font-awesome.min.css">
 	<script src="assets/mui/js/mui.min.js"></script>
 	<script src="assets/zepto/zepto.min.js"></script>
-	<script src="assets/artTemplate/template-native.js"></script>
+	<script src="assets/artTemplate/template-web.js"></script>
+	<script src="js/public.js"></script>
 	<script src="js/category.js"></script>
 </head>
 <body>
@@ -27,7 +29,7 @@
 			<span class="mui-tab-label">分类</span>
 		</a>
 		<a class="mui-tab-item" href="cart.html">
-			<span class="mui-icon iconfont icon-daohanggouwuche"></span>
+			<span class="mui-icon fa fa-shopping-cart" ></span>
 			<span class="mui-tab-label">购物车</span>
 		</a>
 		<a class="mui-tab-item" href="user.html">
@@ -56,26 +58,26 @@
 	</div>
 
 	<script id="category-first" type="text/template">
-		<% for(var i=0;i<result.length;i++){ %>
-			<a
-				href="#"
-				data-id="<%=result[i].id %>"><%=result[i].categoryName %></a>
-		<% } %>
+		{{each result}}
+		<a href="#" data-id="{{$value.id}}">
+			{{$value.categoryName}}
+		</a>
+		{{/each}}
 	</script>
 
 	<script id="category-second" type="text/template">
-		<% for(var i=0;i<rows.length;i++){ %>
+		{{each rows}}
 			<li>
 				<a href="#">
-					<img src="<%=rows[i].brandLogo %>">
-					<p><%=rows[i].brandName %></p>
+					<img src="{{$value.brandLogo}}"/>
+					<p>{{$value.brandName}}</p>
 				</a>
 			</li>
-		<% } %>
+		{{/each}}
 
-		<% if(!rows.length){ %>
-			<div class="noresult">暂无数据</div>
-		<% } %>
+		{{if(!rows.length) }}
+			 	<div class="noresult">暂无数据</div>
+		{{/if}}
 	</script>
 </body>
 </html>

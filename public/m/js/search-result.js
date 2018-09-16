@@ -32,10 +32,8 @@ $(function(){
         html = "";
         page = 1;
         mui('#refreshContainer').pullRefresh().refresh(true);
-        gerData();
-    })
-
-
+        getData();
+    });
 });
 function getParamsByUrl(url, name){
     var params = url.substr(url.indexOf('?')+1);
@@ -49,7 +47,7 @@ function getParamsByUrl(url, name){
     return null;
 }
 
-function gerData(){
+function getData(){
     if(!This){
         This = this;
     }
@@ -58,21 +56,18 @@ $.ajax({
     url:'/product/queryProduct',
     type:'get',
     data:{
-        page:1,
-        pageSize:6,
-        proName:keyword
+        page:page++,
+        pageSize:3,
+        proName:keyword,
+        price:priceSort
     },
     success:function(response){
-        if(response.data.length>0){
-            html =template('searchTpi',response);
-            $('#search-box').html(html);
+       console.log(response);
+        html +=template('searchTpl',response);
+        $('#search-box').html(html);
 
             //告诉上拉加载组件当前数据加载完毕
-            This.endPullupToRefresh(false);
-        }else{
-            //告诉上拉加载组件当前数据加载完毕
-            This.endPullupToRefresh(true);
-        }
+            This.endPullupToRefresh(response.data.length==0);
     }
 });
 
