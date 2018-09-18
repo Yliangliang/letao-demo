@@ -14,15 +14,15 @@ $(function(){
      var vCode =$('[name="vCode"]').val();
 
      if(!username){
-         alert("请输入用户名");
+         mui.toast("请输入用户名");
          return;
      }
      if(mobile.length<11){
-         alert("请输入正确的手机号码");
+         mui.toast("请输入正确的手机号码");
          return;
      }
      if(againPass!==password){
-         alert("两次输入的密码不一样");
+         mui.toast("两次输入的密码不一样");
          return;
      }
      $.ajax({
@@ -35,7 +35,7 @@ $(function(){
              vCode:vCode
          },
          success:function(res){
-             alert("注册成功");
+             mui.toast("注册成功");
              setTimeout(function(){
                  location.href="login.html"
              },2000)
