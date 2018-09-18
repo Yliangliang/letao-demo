@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/search-result.css">
 	<script src="assets/mui/js/mui.min.js"></script>
+	<script src="assets/zepto/zepto.min.js"></script>
+	<!--<script src="assets/artTemplate/template-native.js"></script>-->
+	<script src="assets/artTemplate/template-web.js"></script>
+	<script src="js/public.js"></script>
 	<script src="js/search-result.js"></script>
 </head>
 <body>
@@ -32,9 +36,10 @@
 			<span class="mui-tab-label">会员中心</span>
 		</a>
 	</nav>
-	<div class="mui-content">
+	<div id="refreshContainer">
+		<div>
 		<div class="mui-row filter">
-			<div class="mui-col-xs-6">
+			<div class="mui-col-xs-6" id="priceSort">
 				价格
 				<span class="mui-icon mui-icon-arrowdown"></span>
 			</div>
@@ -44,62 +49,80 @@
 			</div>
 		</div>
 		<div class="product">
-			<ul class="mui-clearfix">
-				<li>
-					<a href="#">
-						<img src="images/product.jpg">
-						<span class="name">
-							adidas阿迪达斯 男式 场下休闲篮球鞋S83700
-						</span>
-						<p>
-							<span>¥560</span>
-							<span>¥888</span>
-						</p>
-						<span class="buy-now">立即购买</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="images/product.jpg">
-						<span class="name">
-							adidas阿迪达斯 男式 场下休闲篮球鞋S83700
-						</span>
-						<p>
-							<span>¥560</span>
-							<span>¥888</span>
-						</p>
-						<span class="buy-now">立即购买</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="images/product.jpg">
-						<span class="name">
-							adidas阿迪达斯 男式 场下休闲篮球鞋S83700
-						</span>
-						<p>
-							<span>¥560</span>
-							<span>¥888</span>
-						</p>
-						<span class="buy-now">立即购买</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<img src="images/product.jpg">
-						<span class="name">
-							adidas阿迪达斯 男式 场下休闲篮球鞋S83700
-						</span>
-						<p>
-							<span>¥560</span>
-							<span>¥888</span>
-						</p>
-						<span class="buy-now">立即购买</span>
-					</a>
-				</li>
+			<ul class="mui-clearfix" id="search-box">
+				<!--<li>-->
+					<!--<a href="#">-->
+						<!--<img src="images/product.jpg">-->
+						<!--<span class="name">-->
+							<!--adidas阿迪达斯 男式 场下休闲篮球鞋S83700-->
+						<!--</span>-->
+						<!--<p>-->
+							<!--<span>¥560</span>-->
+							<!--<span>¥888</span>-->
+						<!--</p>-->
+						<!--<span class="buy-now">立即购买</span>-->
+					<!--</a>-->
+				<!--</li>-->
+				<!--<li>-->
+					<!--<a href="#">-->
+						<!--<img src="images/product.jpg">-->
+						<!--<span class="name">-->
+							<!--adidas阿迪达斯 男式 场下休闲篮球鞋S83700-->
+						<!--</span>-->
+						<!--<p>-->
+							<!--<span>¥560</span>-->
+							<!--<span>¥888</span>-->
+						<!--</p>-->
+						<!--<span class="buy-now">立即购买</span>-->
+					<!--</a>-->
+				<!--</li>-->
+				<!--<li>-->
+					<!--<a href="#">-->
+						<!--<img src="images/product.jpg">-->
+						<!--<span class="name">-->
+							<!--adidas阿迪达斯 男式 场下休闲篮球鞋S83700-->
+						<!--</span>-->
+						<!--<p>-->
+							<!--<span>¥560</span>-->
+							<!--<span>¥888</span>-->
+						<!--</p>-->
+						<!--<span class="buy-now">立即购买</span>-->
+					<!--</a>-->
+				<!--</li>-->
+				<!--<li>-->
+					<!--<a href="#">-->
+						<!--<img src="images/product.jpg">-->
+						<!--<span class="name">-->
+							<!--adidas阿迪达斯 男式 场下休闲篮球鞋S83700-->
+						<!--</span>-->
+						<!--<p>-->
+							<!--<span>¥560</span>-->
+							<!--<span>¥888</span>-->
+						<!--</p>-->
+						<!--<span class="buy-now">立即购买</span>-->
+					<!--</a>-->
+				<!--</li>-->
 			</ul>
+		</div>
 		</div>
 		
 	</div>
+	<script id="searchTpl" type="text/template">
+		{{each data}}
+			<li>
+				<a href="#">
+					<img src="{{$value.pic[0].picAddr}}" alt=""/>
+					<span class="name">
+						{{$value.proName}}
+					</span>
+					<p>
+						<span>{{$value.price}}</span>
+						<span>{{$value.oldPrice}}</span>
+					</p>
+					<span class="buy-now">立即购买</span>
+				</a>
+			</li>
+		{{/each}}
+	</script>
 </body>
 </html>
