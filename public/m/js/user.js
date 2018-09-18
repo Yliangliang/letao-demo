@@ -1,7 +1,7 @@
 var userInfo = null;
 $.ajax({
     url:'/user/queryUserMessage',
-   type:'get',
+    type:'get',
     async:false,
     success:function(res){
         console.log(res);
